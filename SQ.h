@@ -1,8 +1,10 @@
+#ifndef _SQ_H_
+#define _SQ_H_
 #include <iostream>
 #include <vector>
 #include "Pixel.h"
 #include "BPT.h"
-
+#include "EmptyIndex.h"
 using namespace std;
 
 class SQ
@@ -12,15 +14,24 @@ public:
 	double epsilon;
 	vector<vector<vector<int>>> match;
 	BPT bpt;
+	int queryLen, tsLen, tsNum;
+	vector<EmptyIndex> matchEI;
 
 	//Part 1
 	void initialBPT();
+	
 	//Part 2
-	vector<vector<int>>(double v);
+	void similarityQuery(double v);
 	void sequenceQuery(vector<double> querySequence);
+	void matchCheck();
+	void clearMatchTS();
+	
 	//Part 3
 	vector<matchIndex> subsequencyMatch();
+	
 	//Part 40
 
 
 };
+
+#endif

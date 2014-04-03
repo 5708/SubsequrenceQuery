@@ -1,3 +1,5 @@
+#ifndef _BPT_H_
+#define _BPT_H_
 #include <iostream>
 #include <vector>
 
@@ -10,3 +12,5 @@ public:
 	void rangeQuery(double low, up);
 
 }
+
+#endif
