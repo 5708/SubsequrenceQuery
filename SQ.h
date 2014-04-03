@@ -13,7 +13,7 @@ public:
 	vector<Pixel> pixels;
 	double epsilon;
 	vector<vector<vector<int>>> match;
-	BPT bpt;
+	BPT *bpt;
 	int queryLen, tsLen, tsNum;
 	vector<EmptyIndex> matchEI;
 
@@ -22,7 +22,7 @@ public:
 	
 	//Part 2
 	void similarityQuery(double v);
-	void sequenceQuery(vector<double> querySequence);
+	void sequenceQuery(vector<double> querySequence, BPT *b);
 	void matchCheck();
 	void clearMatchTS();
 	

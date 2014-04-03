@@ -15,19 +15,20 @@ void SQ::similarityQuery(double v)
 	resultSize = bpt.rangeResult.size();
 	for(int i = 0; i < bpt.rangeResult.size(); ++i)
 	{
-		sort(bpt.rangeResult.begin(), bpt.rangeResult.end());
+		sort((*bpt).rangeResult.begin(), (*bpt).rangeResult.end());
 	}
 
 }
-void SQ::sequenceQuery(vector<double> querySequence)
+void SQ::sequenceQuery(vector<double> querySequence, BPT* b)
 {
 	int qsSize;
 
+	bpt = b;
 	qsSize = match.size();
 	for(int i = 0; i < qsSize; ++i)
 	{
 		similarityQuery(querySequence(i));
-		match.puh_back(bpt.rangeResult);
+		match.puh_back((*bpt).rangeResult);
 	}
 }
 
