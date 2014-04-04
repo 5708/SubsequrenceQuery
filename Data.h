@@ -3,6 +3,7 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 class DATA{
@@ -10,7 +11,7 @@ public:
 	MatrixXd m;
 	
 	void read(string filename, int tsNum, int tsLen);
-	void write(vector<int> result);
+	void write(vector<int>* result);
 	
 };
 

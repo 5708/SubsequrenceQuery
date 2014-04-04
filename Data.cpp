@@ -14,4 +14,17 @@ void Data::read(string filename, int tsNum, int tsLen)
 			file >> m(i,j);
 		}
 	}
+	file.close();
+}
+
+void Data::write(vector<int>* result)
+{
+	ofstream file;
+	int resultSize;
+	
+	file.open ("output.txt");
+	resultSize = (*result).size();
+	for(int i = 0; i < resultSize; ++i)
+		file << (*result)[i]<<"\n";
+	file.close();
 }
