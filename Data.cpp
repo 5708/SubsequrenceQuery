@@ -1,9 +1,12 @@
 #include "Data.h"
 
 using namespace std;
-void Data::read(string filename, int tsNum, int tsLen)
+void Data::read(string filename, int tNum, int tLen)
 {
 	ifstream file;
+	
+	tsNum = tNum;
+	tsLen = tLen;
 	file.open(filename);
 	m.resize(0,0);
 	m.resize(tsNum, tsLen);

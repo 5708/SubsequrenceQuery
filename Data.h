@@ -4,13 +4,14 @@
 #include <Eigen/Dense>
 #include <fstream>
 #include <vector>
-
+using Eigen::MatrixXd;
 using namespace std;
-class DATA{
+class Data{
 public:
 	MatrixXd m;
+	int tsNum, tsLen;
 	
-	void read(string filename, int tsNum, int tsLen);
+	void read(string filename, int tNum, int tLen);
 	void write(vector<int>* result);
 	
 };

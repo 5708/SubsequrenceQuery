@@ -2,15 +2,14 @@
 #define _SQ_H_
 #include <iostream>
 #include <vector>
-#include "Pixel.h"
 #include "BPT.h"
 #include "EmptyIndex.h"
+
 using namespace std;
 
 class SQ
 {
 public:
-	vector<Pixel> pixels;
 	double epsilon;
 	vector<vector<int>> singleMatch;
 	vector<vector<vector<int>>> match;
