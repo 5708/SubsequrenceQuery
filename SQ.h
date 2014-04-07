@@ -12,6 +12,7 @@ class SQ
 public:
 	vector<Pixel> pixels;
 	double epsilon;
+	vector<vector<int>> singleMatch;
 	vector<vector<vector<int>>> match;
 	BPT *bpt;
 	int queryLen, tsLen, tsNum;
