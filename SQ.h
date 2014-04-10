@@ -2,8 +2,9 @@
 #define _SQ_H_
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "BPT.h"
-#include "EmptyIndex.h"
+#include "CheckIndex.h"
 
 using namespace std;
 
@@ -11,23 +12,25 @@ class SQ
 {
 public:
 	double epsilon;
-	vector<vector<int>> singleMatch;
-	vector<vector<vector<int>>> match;
+	vector<int> singleMatch;
+	vector<vector<int>> match;
 	BPT *bpt;
 	int queryLen, tsLen, tsNum;
-	vector<EmptyIndex> matchEI;
+	vector<int> result;
 
+	void query(vector<double> querySequence, BPT *b, double epsilon);
 	//Part 1
 	void initialBPT();
 	
 	//Part 2
 	void similarityQuery(double v);
-	void sequenceQuery(vector<double> querySequence, BPT *b);
+	void sequenceQuery(vector<double> querySequence);
 	void matchCheck();
-	void clearMatchTS();
+	int search(vector<int> d, int v);
 	
 	//Part 3
-	vector<matchIndex> subsequencyMatch();
+	vector<int> subsequencyMatch_B();
+	vector<int> subsequencyMatch_S();
 	
 	//Part 40
 

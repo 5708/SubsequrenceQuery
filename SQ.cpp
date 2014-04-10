@@ -11,93 +11,86 @@ void SQ::similarityQuery(double v)
 	up = v + epsilon;
 	low = v - epsilon;
 	(*bpt).rangeQuery(low, up);
-	singleMatch.resize(0);
-	singleMatch.resize(tsNum);
-	resultSize = bpt.rangeResult.size();
-	for(int i = 0; i < (*bpt).rangeResult.size(); ++i)
-	{
-		tseID = (*bpt).rangeResult[i] / 100;
-		tstID = (*bpt).rangeResult[i] - 100*tseID;
-		singleMatch[tseID].push_back(tseID);
-	}
+	singleMatch = (*bpt).rangeResult;
+	sort(singleMatch.begin(), singleMatch.end());
 }
-void SQ::sequenceQuery(vector<double> querySequence, BPT* b)
+void SQ::sequenceQuery(vector<double> qs)
 {
 	int qsSize;
 
-	bpt = b;
-	qsSize = querySequence.size();
+	qsSize = qs.size();
+	match.resize(0);
 	for(int i = 0; i < qsSize; ++i)
 	{
-		similarityQuery(querySequence(i));
-		match.puh_back(singleMatch);
+		similarityQuery(qs[i]);
+		match.push_back(singleMatch);
 	}
 }
 
 void SQ::matchCheck()
 {
-	bool popped = true;
+	vector<int> top, bot;
+	int qsSize, eraseBoundBot, eraseBoundTop, topM, botM, botID, topID;
 	
-	matchEI.resize(0);
-	matchEI.resize(tsNum);
-	for(int i = 0; i < queryLen; ++i)
+	
+	for(int i = 0; i < qsSize; ++i)
 	{
-		for(int j = 0; j < tsNum; ++j)
-		{	
-			if(matchEI[j].isempty == false)
-			{
-				while(popped)
-				{
-					popped = false;
-					if(match[i][j].size() != 0)
-					{
-						if(match[i][j].front() < i + 1)
-						{
-							match[i][j].erase(match.begin());
-							popped = true;
-						}
-						else if(((i - 1) >= 0) && (match[i][j].front() < match[i-1][j].front()))
-						{
-							match[i][j].erase(match.begin());
-							popped = true;
-						}
-						else if(match[i][j].back() > (tsLen - queryLen + i + 1))
-						{
-							match[i][j].pop_back();
-							popped = true;
-						}
-						else if(((i+1) < queryLen) && (match[i+1][j].size() != 0))
-						{
-							if(match[i][j].back() > match[i+1][j].back())
-							{
-								match[i][j].pop_back();
-								popped = true;
-							}
-						}
-						else if((i+1) != queryLen)
-						{
-							clearMatchTS(j);
-						}
-					}
-					else
-					{
-						clearMatchTS(j);
-					}
-				}
-			}
-		}
-	
+		top.push_back(match[i][0]);
+		bot.push_back(match[i].back());
 	}
+	
+	topM = top[0];
+	topID = 0;
+	botM = bot[0];
+	botID = 0;
+	for(int i = 1; i < qsSize; ++i)
+	{
+		if(topM > top[i])
+		{
+			topM = top[i];
+			topID = i;
+		}
+		if(botM > bot[i])
+		{
+			botM = bot[i];
+			botID = i;
+		}
+	}
+
+
+	for(int i = 0; i < qsSize; ++i)
+	{
+		eraseBoundTop = search(match[i],topM - topID + i);
+		match[i].erase(match[i].begin(),match[i].begin()+eraseBoundTop);
+
+		eraseBoundBot = search(match[i], botM - botID + i + 1);
+		match[i].erase(match[i].end() - match[i].size() + eraseBoundBot, match[i].end());
+	}
+
 	
 }
 
-void SQ::clearMatchTS(int tsid)
+int SQ::search(vector<int> d, int v)
 {
-	for(int i = 0; i < queryLen; ++i)
+	int s = d.size();
+
+	for(int i = 0; i < s; ++i)
 	{
-		match[i][tsid].clear();	
+		if(d[i] >= v)
+		{
+			return i;
+		}
 	}
-	matchEI[tsid] = true;
+	return s-1;
+
+}
+void SQ::query(vector<double> querySequence, BPT *b, double e)
+{
+	epsilon = e;
+	bpt = b;
+	sequenceQuery(querySequence);
+	matchCheck();
+	
 }
 // Part 3
 
