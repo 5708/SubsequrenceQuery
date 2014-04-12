@@ -3,6 +3,10 @@
  
 #include "BPlus_node.h"  
 #include <vector>  
+#include <Eigen/Dense>
+#include "Data.h"
+
+using Eigen::MatrixXd;
 using namespace std; 
  
 enum COMPARE_OPERATOR{LT, LE, EQ, BE, BT, BETWEEN}; // comparison operator：<、<=、=、>=、>、<>  
@@ -29,6 +33,7 @@ public:
     void clear();             
     void print()const;        // print tree's key value 
     void printData()const;    // print data  
+    void BPTbuild(MatrixXd *m);
 private: 
     void recursive_insert(CNode* parentNode, KeyType key, const DataType& data); 
     void recursive_remove(CNode* parentNode, KeyType key); 

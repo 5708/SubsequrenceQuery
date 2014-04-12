@@ -2,18 +2,21 @@
 #include "BPlus_node.h"
 #include <iostream>
 #include <algorithm>
+#include <Eigen/Dense>
+#include "Data.h"
 
+using Eigen::MatrixXd;
 using namespace std;
 
 int main(){
-    CBPlusTree B1;
-    B1.insert(1,1);
-    B1.insert(2,2);
-    B1.insert(5,3);
-    B1.insert(9,4);
-    B1.insert(4,5);
-    B1.print();
-    B1.printData();
+    CBPlusTree B;
+    MatrixXd* matrix = new MatrixXd(3,3);
+    (*matrix)<< 1,2,3,4,5,6,7,9,8;
+    Data d;
+    d.read("../Data/h20v9EVI1D1_1.txt",10000,285);
+    B.BPTbuild(matrix);
+    B.print();
+    B.printData();
 }
 CBPlusTree::CBPlusTree(){
     m_Root = NULL;
@@ -23,7 +26,22 @@ CBPlusTree::CBPlusTree(){
 CBPlusTree::~CBPlusTree(){
     clear();
 }
+void CBPlusTree::BPTbuild(MatrixXd *m){
+    int x = m->cols();
+    int y = m->rows();
+    for(int i = 0; i < x; i++)
+    {
+        for(int j = 0; j < y; j++)
+        {
+            //cout<<"i"<<m->data()<<endl;
+            KeyType k = (*m)(j,i) ;
+            DataType d =j*1000+i;
+            insert(k, d);
+        }
+    }
 
+    
+}
 bool CBPlusTree::insert(KeyType key, const DataType& data){
 //whether the key has already existed
  //if (search(key))
