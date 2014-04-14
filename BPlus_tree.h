@@ -10,7 +10,9 @@ using Eigen::MatrixXd;
 using namespace std; 
  
 enum COMPARE_OPERATOR{LT, LE, EQ, BE, BT, BETWEEN}; // comparison operator：<、<=、=、>=、>、<>  
-const int INVALID_INDEX = -1; 
+const int INVALID_INDEX = -1;
+const int FRONT = 0;
+const int BACK = 1;
  
 struct SelectResult 
 { 
@@ -34,6 +36,7 @@ public:
     void print()const;        // print tree's key value 
     void printData()const;    // print data  
     void BPTbuild(MatrixXd *m);
+	vector<int> rangeQuery(double up, double low);
 private: 
     void recursive_insert(CNode* parentNode, KeyType key, const DataType& data); 
     void recursive_remove(CNode* parentNode, KeyType key); 
@@ -42,9 +45,11 @@ private:
     void changeKey(CNode *pNode, KeyType oldKey, KeyType newKey); 
     void search(KeyType key, SelectResult& result); 
     void recursive_search(CNode* pNode, KeyType key, SelectResult& result); 
+	CNode* recursive_rangeQuery(CNode *pNode, KeyType key, int fb);
     //void remove(KeyType key, DataType& dataValue); 
     //void recursive_remove(CNode* parentNode, KeyType key, DataType& dataValue); 
-private: 
+private:
+	int frontIndex, backIndex;
     CNode* m_Root; 
     CLeafNode* m_DataHead; 
     KeyType m_MaxKey;  // find the max key in the tree 

@@ -21,9 +21,6 @@
     <ClCompile Include="..\..\BPlus_tree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\BPT.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Data.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -31,6 +28,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SQ.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\BPT.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,9 +41,6 @@
     <ClInclude Include="..\..\BPlus_tree.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\BPT.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Data.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -51,6 +48,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SQ.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\BPT.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

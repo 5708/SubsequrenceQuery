@@ -1,16 +1,17 @@
 #ifndef _SQ_H_
 #define _SQ_H_
 #include <iostream>
+#include "BPT.h"
 #include <vector>
 #include <algorithm>
-#include "BPT.h"
-#include "CheckIndex.h"
+
+
 
 using namespace std;
 
+
 class SQ
 {
-public:
 	double epsilon;
 	vector<int> singleMatch;
 	vector<vector<int>> match;
@@ -20,7 +21,7 @@ public:
 
 	void query(vector<double> querySequence, BPT *b, double epsilon);
 	//Part 1
-	void initialBPT();
+	//void initialBPT();
 	
 	//Part 2
 	void similarityQuery(double v);

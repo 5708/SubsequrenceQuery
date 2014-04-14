@@ -7,7 +7,7 @@ enum SIBLING_DIRECTION{LEFT, RIGHT};
 typedef double KeyType;
 typedef int DataType;
 
-const int ORDER = 7;  				//B+ tree's order
+const int ORDER = 4;  				//B+ tree's order
 const int MINNUM_KEY = ORDER - 1; 	//the min amount of keys
 const int MAXNUM_KEY = 2*ORDER - 1;	//the max amount of keys
 const int MINNUM_CHILD = MINNUM_KEY + 1; //the min amount of children tree

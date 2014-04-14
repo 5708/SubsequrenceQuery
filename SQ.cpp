@@ -1,5 +1,6 @@
 #include "SQ.h"
-using namespace std;
+
+/*
 // Part 1
 
 // Part 2
@@ -95,3 +96,4 @@ void SQ::query(vector<double> querySequence, BPT *b, double e)
 // Part 3
 
 // Part 4
+*/
